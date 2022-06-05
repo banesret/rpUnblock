@@ -2,7 +2,6 @@
 
 uses
   Vcl.Forms,
-  VCL.HTMLHelpViewer,
   unMain in 'unMain.pas' {MainForm};
 
 {$R *.res}
