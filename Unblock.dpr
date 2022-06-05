@@ -2,13 +2,14 @@
 
 uses
   Vcl.Forms,
-  UnitMain in 'UnitMain.pas' {Form1};
+  VCL.HTMLHelpViewer,
+  unMain in 'unMain.pas' {MainForm};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TMainForm, MainForm);
   Application.Run;
 end.
