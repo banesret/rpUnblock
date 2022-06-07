@@ -2,7 +2,8 @@
 
 uses
   Vcl.Forms,
-  unMain in 'unMain.pas' {MainForm};
+  unMain in 'unMain.pas',
+  unCMain in 'unCMain.pas';
 
 {$R *.res}
 
