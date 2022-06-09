@@ -10,6 +10,8 @@ type
     type
       TDirections = (Lefty, Right, Up, Down);
       PTRect = ^TRect;
+    var
+      FResult: Boolean;
     procedure Initialize;
     procedure CreateForm;
     procedure Run(Block: PTRect; Directions: TDirections);
@@ -91,7 +93,17 @@ begin
           CBlock3.Contains(P) or
           CExitBlock.Contains(P);
         if not Blocked then Block.Offset(1, 0)
-      end;
+      end
+    {block on right edge}
+    else
+      {block is exit block}
+      if Block = @CExitBlock then
+        {block and exit segment are at the same vertical level}
+        if Block.Top = CExitSegment.Top then
+        begin
+          Block.Offset(1, 0);
+          FResult := true;
+        end;
 
   {vertical movement down}
   if (Block.Height <> 1) and (Directions = Down) then

@@ -74,13 +74,6 @@ object MainForm: TMainForm
       Pen.Width = 3
       ShowHint = True
     end
-    object shpExitSegment: TShape
-      Left = 232
-      Top = 189
-      Width = 65
-      Height = 65
-      Brush.Color = clPurple
-    end
     object shpExitBlock: TShape
       Left = 144
       Top = 47
@@ -91,6 +84,13 @@ object MainForm: TMainForm
       ParentShowHint = False
       Pen.Width = 3
       ShowHint = True
+    end
+    object shpExitSegment: TShape
+      Left = 232
+      Top = 189
+      Width = 65
+      Height = 65
+      Brush.Color = clPurple
     end
   end
   object pnlNavigator: TPanel

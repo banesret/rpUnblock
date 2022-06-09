@@ -87,38 +87,40 @@ end;
 
 procedure TMainForm.sbLeftClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Lefty) else
-  if rbtBlock1.Checked then CApplication.Run(@CBlock1, Lefty) else
-  if rbtBlock2.Checked then CApplication.Run(@CBlock2, Lefty) else
-  if rbtBlock3.Checked then CApplication.Run(@CBlock3, Lefty);
+  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Lefty)
+  else if rbtBlock1.Checked then CApplication.Run(@CBlock1, Lefty)
+       else if rbtBlock2.Checked then CApplication.Run(@CBlock2, Lefty)
+            else if rbtBlock3.Checked then CApplication.Run(@CBlock3, Lefty);
   // no idea why can't work just Left
   actDrawExecute(nil)
 end;
 
 procedure TMainForm.sbRightClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Right) else
-  if rbtBlock1.Checked then CApplication.Run(@CBlock1, Right) else
-  if rbtBlock2.Checked then CApplication.Run(@CBlock2, Right) else
-  if rbtBlock3.Checked then CApplication.Run(@CBlock3, Right);
-  actDrawExecute(nil)
+  CApplication.FResult := False;
+  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Right)
+  else if rbtBlock1.Checked then CApplication.Run(@CBlock1, Right)
+       else if rbtBlock2.Checked then CApplication.Run(@CBlock2, Right)
+            else if rbtBlock3.Checked then CApplication.Run(@CBlock3, Right);
+  actDrawExecute(nil);
+  if CApplication.FResult then ShowMessage('Win!')
 end;
 
 procedure TMainForm.sbUpClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Up) else
-  if rbtBlock1.Checked then CApplication.Run(@CBlock1, Up) else
-  if rbtBlock2.Checked then CApplication.Run(@CBlock2, Up) else
-  if rbtBlock3.Checked then CApplication.Run(@CBlock3, Up);
+  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Up)
+  else if rbtBlock1.Checked then CApplication.Run(@CBlock1, Up)
+       else if rbtBlock2.Checked then CApplication.Run(@CBlock2, Up)
+            else if rbtBlock3.Checked then CApplication.Run(@CBlock3, Up);
   actDrawExecute(nil)
 end;
 
 procedure TMainForm.spDownClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Down) else
-  if rbtBlock1.Checked then CApplication.Run(@CBlock1, Down) else
-  if rbtBlock2.Checked then CApplication.Run(@CBlock2, Down) else
-  if rbtBlock3.Checked then CApplication.Run(@CBlock3, Down);
+  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Down)
+  else if rbtBlock1.Checked then CApplication.Run(@CBlock1, Down)
+       else if rbtBlock2.Checked then CApplication.Run(@CBlock2, Down)
+            else if rbtBlock3.Checked then CApplication.Run(@CBlock3, Down);
   actDrawExecute(nil)
 end;
 
