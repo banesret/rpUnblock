@@ -7,24 +7,21 @@ uses
 
 type
   TCApplication = record
+    type
+      TDirections = (Lefty, Right, Up, Down);
+      PTRect = ^TRect;
     procedure Initialize;
     procedure CreateForm;
-    procedure Run;
+    procedure Run(Block: PTRect; Directions: TDirections);
   end;
 
 var
   CApplication: TCApplication;
   CTable, CExitBlock, CBlock1, CBlock2, CBlock3, CExitSegment: TRect;
 
-type
-  Directions = (Left, Right, Up, Down);
-
 implementation
-var
-  Selector1: Char;
-  Selector2: Char;
 
-procedure TCApplication.initialize;
+procedure TCApplication.Initialize;
 begin
   {Table definition}
   CTable.SetLocation(0, 0);
@@ -63,60 +60,66 @@ end;
 
 procedure TCApplication.Run;
 var
-  BlockX: TRect;
-  DirectionX: Directions;
-  L: TPoint; {new potential location}
+  P: TPoint;
   Blocked: Boolean;
 begin
-  // read a block
-  Readln(Selector1);
-  case Selector1 of
-    '1': BlockX := CBlock1;
-    '2': BlockX := CBlock2;
-    '3': BlockX := CBlock3;
-    '4':  BlockX := CExitBlock
-  end;
+  P := Block.Location;
 
-  // read a direction
-  Readln(Selector2);
-  case Selector2 of
-    '1': DirectionX := Left;
-    '2': DirectionX := Right;
-    '3': DirectionX := Up;
-    '4': DirectionX := Down
-  end;
-  L := BlockX.Location; {not the same address due to property read method}
-  {hotizontal movement is true}
-  if BlockX.Width <> 1 then
-    if DirectionX = Left then
-      {block not on left edge}
-      if L.X > 0 then
-        begin
-          L.X := L.X - 1;
-          Blocked :=
-            CBlock1.Contains(L) or
-            CBlock2.Contains(L) or
-            CBlock3.Contains(L) or
-            CExitBlock.Contains(L);
-          if not Blocked then
-            begin
-              case Selector1 of
-                '1': CBlock1.SetLocation(L);
-                '2': CBlock2.SetLocation(L);
-                '3': CBlock3.SetLocation(L);
-                '4': CExitBlock.SetLocation(L)
-              end;
-            end;
-        end;
-//
-//
-//      if DirectionX = Right then
-//
-//   {horizontal movement is false}
-//   else
+  {horizontal movement left}
+  if (Block.Width <> 1) and (Directions = Lefty) then
+    {block not on left edge}
+    if Block.Left > 0 then
+      begin
+        P.Offset(-1, 0);
+        Blocked :=
+          CBlock1.Contains(P) or
+          CBlock2.Contains(P) or
+          CBlock3.Contains(P) or
+          CExitBlock.Contains(P);
+        if not Blocked then Block.Offset(-1, 0)
+      end;
 
-        ;
-  Readln
+  {horizontal movement right}
+  if (Block.Width <> 1) and (Directions = Right) then
+    {block not on right edge}
+    if Block.Right <= 3 then
+      begin
+        P.Offset(Block.Width, 0);
+        Blocked :=
+          CBlock1.Contains(P) or
+          CBlock2.Contains(P) or
+          CBlock3.Contains(P) or
+          CExitBlock.Contains(P);
+        if not Blocked then Block.Offset(1, 0)
+      end;
+
+  {vertical movement down}
+  if (Block.Height <> 1) and (Directions = Down) then
+    {block not on down edge}
+    if Block.Bottom <= 3 then
+      begin
+        P.Offset(0, CBlock1.Height);
+         Blocked :=
+          CBlock1.Contains(P) or
+          CBlock2.Contains(P) or
+          CBlock3.Contains(P) or
+          CExitBlock.Contains(P);
+        if not Blocked then Block.Offset(0, 1)
+      end;
+
+  {vertical movement up}
+  if (Block.Height <> 1) and (Directions = Up) then
+    {block not on up edge}
+    if Block.Top > 0 then
+      begin
+        P.Offset(0, -1);
+        Blocked :=
+          CBlock1.Contains(P) or
+          CBlock2.Contains(P) or
+          CBlock3.Contains(P) or
+          CExitBlock.Contains(P);
+        if not Blocked then Block.Offset(0, -1)
+      end;
 end;
 
 end.

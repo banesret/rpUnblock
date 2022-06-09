@@ -28,21 +28,35 @@ type
     actDrawBlock2: TAction;
     actDrawBlock3: TAction;
     actDrawExitSegment: TAction;
-    shpExitBlock: TShape;
+    mniGame: TMenuItem;
+    actDraw: TAction;
+    pnlTable: TPanel;
     shpBlock1: TShape;
     shpBlock2: TShape;
     shpBlock3: TShape;
     shpExitSegment: TShape;
-    shpTable: TShape;
+    shpExitBlock: TShape;
+    Label1: TLabel;
+    Panel1: TPanel;
+    rbtExitBlock: TRadioButton;
+    rbtBlock1: TRadioButton;
+    rbtBlock2: TRadioButton;
+    rbtBlock3: TRadioButton;
+    lblBlocks: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure actHelpContentsExecute(Sender: TObject);
-    procedure actStartGameExecute(Sender: TObject);
     procedure actDrawTableExecute(Sender: TObject);
     procedure actDrawBlock1Execute(Sender: TObject);
     procedure actDrawBlock2Execute(Sender: TObject);
     procedure actDrawBlock3Execute(Sender: TObject);
     procedure actDrawExitSegmentExecute(Sender: TObject);
     procedure actDrawExitBlockExecute(Sender: TObject);
+    procedure actDrawExecute(Sender: TObject);
+    procedure actStartGameExecute(Sender: TObject);
+    procedure sbRightClick(Sender: TObject);
+    procedure spDownClick(Sender: TObject);
+    procedure sbUpClick(Sender: TObject);
+    procedure sbLeftClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -65,10 +79,47 @@ const
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-//  CApplication.Run;
-
   Application.HelpFile := ExtractFilePath(Application.ExeName) +
-    'Help\Unblock.chm'
+    'Help\Unblock.chm';
+  rbtBlock1.Checked := True;
+  actStartGameExecute(nil)
+end;
+
+procedure TMainForm.sbLeftClick(Sender: TObject);
+begin
+  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Lefty) else
+  if rbtBlock1.Checked then CApplication.Run(@CBlock1, Lefty) else
+  if rbtBlock2.Checked then CApplication.Run(@CBlock2, Lefty) else
+  if rbtBlock3.Checked then CApplication.Run(@CBlock3, Lefty);
+  // no idea why can't work just Left
+  actDrawExecute(nil)
+end;
+
+procedure TMainForm.sbRightClick(Sender: TObject);
+begin
+  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Right) else
+  if rbtBlock1.Checked then CApplication.Run(@CBlock1, Right) else
+  if rbtBlock2.Checked then CApplication.Run(@CBlock2, Right) else
+  if rbtBlock3.Checked then CApplication.Run(@CBlock3, Right);
+  actDrawExecute(nil)
+end;
+
+procedure TMainForm.sbUpClick(Sender: TObject);
+begin
+  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Up) else
+  if rbtBlock1.Checked then CApplication.Run(@CBlock1, Up) else
+  if rbtBlock2.Checked then CApplication.Run(@CBlock2, Up) else
+  if rbtBlock3.Checked then CApplication.Run(@CBlock3, Up);
+  actDrawExecute(nil)
+end;
+
+procedure TMainForm.spDownClick(Sender: TObject);
+begin
+  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Down) else
+  if rbtBlock1.Checked then CApplication.Run(@CBlock1, Down) else
+  if rbtBlock2.Checked then CApplication.Run(@CBlock2, Down) else
+  if rbtBlock3.Checked then CApplication.Run(@CBlock3, Down);
+  actDrawExecute(nil)
 end;
 
 procedure TMainForm.actDrawBlock1Execute(Sender: TObject);
@@ -89,6 +140,22 @@ begin
     shpBlock3.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
+procedure TMainForm.actDrawExecute(Sender: TObject);
+begin
+  {draw table}
+  actDrawTableExecute(nil);
+  pnlTable.SendToBack;
+
+  {draw blocks}
+  actDrawExitBlockExecute(nil);
+  actDrawBlock1Execute(nil);
+  actDrawBlock2Execute(nil);
+  actDrawBlock3Execute(nil);
+
+  {draw exit segment}
+  actDrawExitSegmentExecute(nil);
+end;
+
 procedure TMainForm.actDrawExitBlockExecute(Sender: TObject);
 begin
   with CExitBlock do
@@ -104,7 +171,7 @@ end;
 procedure TMainForm.actDrawTableExecute(Sender: TObject);
 begin
   with CTable do
-    shpTable.SetBounds(Left*z, Top*z, Width*z, Height*z)
+    pnlTable.SetBounds(Left*z + 10, Top*z + 30, Width*z, Height*z)
 end;
 
 procedure TMainForm.actHelpContentsExecute(Sender: TObject);
@@ -115,19 +182,7 @@ end;
 procedure TMainForm.actStartGameExecute(Sender: TObject);
 begin
   CApplication.Initialize;
-
-  {draw table}
-  actDrawTableExecute(nil);
-  shpTable.SendToBack;
-
-  {draw blocks}
-  actDrawExitBlockExecute(nil);
-  actDrawBlock1Execute(nil);
-  actDrawBlock2Execute(nil);
-  actDrawBlock3Execute(nil);
-
-  {draw exit segment}
-  actDrawExitSegmentExecute(nil);
+  actDrawExecute(nil)
 end;
 
 end.
