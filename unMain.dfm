@@ -1,9 +1,11 @@
 object MainForm: TMainForm
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'MainForm'
-  ClientHeight = 469
-  ClientWidth = 839
+  ClientHeight = 432
+  ClientWidth = 843
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
