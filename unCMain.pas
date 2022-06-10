@@ -98,11 +98,14 @@ begin
     else
       {block is exit block}
       if Block = @CExitBlock then
-        {block and exit segment are at the same vertical level}
-        if Block.Top = CExitSegment.Top then
         begin
-          Block.Offset(1, 0);
-          FResult := true;
+          P.Offset(Block.Width, 0);
+          {exit segment contains P}
+          if CExitSegment.Contains(P) then
+            begin
+              Block.Offset(1, 0);
+              FResult := true;
+            end
         end;
 
   {vertical movement down}

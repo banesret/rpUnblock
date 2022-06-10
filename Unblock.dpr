@@ -8,8 +8,6 @@ uses
 {$R *.res}
 
 begin
-//  CApplication.Initialize;
-//  CApplication.Run;
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TMainForm, MainForm);
