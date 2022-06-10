@@ -10,25 +10,25 @@ uses
 
 type
   TMainForm = class(TForm)
-    ActionList1: TActionList;
-    actHelpContents: THelpContents;
-    MainMenu1: TMainMenu;
-    Help1: TMenuItem;
-    HelpContent1: TMenuItem;
-    actStartGame: TAction;
-    StartGame1: TMenuItem;
-    pnlNavigator: TPanel;
+    actList: TActionList;
+    mmnMenu: TMainMenu;
+    mniHelp: TMenuItem;
+    mniHelpContent: TMenuItem;
+    mniStartGame: TMenuItem;
+    mniGame: TMenuItem;
+    pnlDirections: TPanel;
     spDown: TSpeedButton;
     sbRight: TSpeedButton;
     sbLeft: TSpeedButton;
     sbUp: TSpeedButton;
+    actHelpContents: THelpContents;
+    actStartGame: TAction;
     actDrawExitBlock: TAction;
     actDrawTable: TAction;
     actDrawBlock1: TAction;
     actDrawBlock2: TAction;
     actDrawBlock3: TAction;
     actDrawExitSegment: TAction;
-    mniGame: TMenuItem;
     actDraw: TAction;
     pnlTable: TPanel;
     shpBlock1: TShape;
@@ -36,12 +36,12 @@ type
     shpBlock3: TShape;
     shpExitSegment: TShape;
     shpExitBlock: TShape;
-    Label1: TLabel;
     Panel1: TPanel;
     rbtExitBlock: TRadioButton;
     rbtBlock1: TRadioButton;
     rbtBlock2: TRadioButton;
     rbtBlock3: TRadioButton;
+    lblDirections: TLabel;
     lblBlocks: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure actHelpContentsExecute(Sender: TObject);
@@ -79,18 +79,18 @@ const
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  Application.HelpFile := ExtractFilePath(Application.ExeName) +
-    'Help\Unblock.chm';
+//  Application.HelpFile := ExtractFilePath(Application.ExeName) +
+//    'Help\Unblock.chm';
   rbtBlock1.Checked := True;
   actStartGameExecute(nil)
 end;
 
 procedure TMainForm.sbLeftClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Lefty)
-  else if rbtBlock1.Checked then CApplication.Run(@CBlock1, Lefty)
-       else if rbtBlock2.Checked then CApplication.Run(@CBlock2, Lefty)
-            else if rbtBlock3.Checked then CApplication.Run(@CBlock3, Lefty);
+  if rbtExitBlock.Checked then CApplication.Run(@ExitBlock, Lefty)
+  else if rbtBlock1.Checked then CApplication.Run(@Block1, Lefty)
+       else if rbtBlock2.Checked then CApplication.Run(@Block2, Lefty)
+            else if rbtBlock3.Checked then CApplication.Run(@Block3, Lefty);
   // no idea why can't work just Left
   actDrawExecute(nil)
 end;
@@ -98,47 +98,47 @@ end;
 procedure TMainForm.sbRightClick(Sender: TObject);
 begin
   CApplication.FResult := False;
-  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Right)
-  else if rbtBlock1.Checked then CApplication.Run(@CBlock1, Right)
-       else if rbtBlock2.Checked then CApplication.Run(@CBlock2, Right)
-            else if rbtBlock3.Checked then CApplication.Run(@CBlock3, Right);
+  if rbtExitBlock.Checked then CApplication.Run(@ExitBlock, Right)
+  else if rbtBlock1.Checked then CApplication.Run(@Block1, Right)
+       else if rbtBlock2.Checked then CApplication.Run(@Block2, Right)
+            else if rbtBlock3.Checked then CApplication.Run(@Block3, Right);
   actDrawExecute(nil);
   if CApplication.FResult then ShowMessage('Win!')
 end;
 
 procedure TMainForm.sbUpClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Up)
-  else if rbtBlock1.Checked then CApplication.Run(@CBlock1, Up)
-       else if rbtBlock2.Checked then CApplication.Run(@CBlock2, Up)
-            else if rbtBlock3.Checked then CApplication.Run(@CBlock3, Up);
+  if rbtExitBlock.Checked then CApplication.Run(@ExitBlock, Up)
+  else if rbtBlock1.Checked then CApplication.Run(@Block1, Up)
+       else if rbtBlock2.Checked then CApplication.Run(@Block2, Up)
+            else if rbtBlock3.Checked then CApplication.Run(@Block3, Up);
   actDrawExecute(nil)
 end;
 
 procedure TMainForm.spDownClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@CExitBlock, Down)
-  else if rbtBlock1.Checked then CApplication.Run(@CBlock1, Down)
-       else if rbtBlock2.Checked then CApplication.Run(@CBlock2, Down)
-            else if rbtBlock3.Checked then CApplication.Run(@CBlock3, Down);
+  if rbtExitBlock.Checked then CApplication.Run(@ExitBlock, Down)
+  else if rbtBlock1.Checked then CApplication.Run(@Block1, Down)
+       else if rbtBlock2.Checked then CApplication.Run(@Block2, Down)
+            else if rbtBlock3.Checked then CApplication.Run(@Block3, Down);
   actDrawExecute(nil)
 end;
 
 procedure TMainForm.actDrawBlock1Execute(Sender: TObject);
 begin
-  with CBlock1 do
+  with Block1 do
     shpBlock1.SetBounds(Left*z, Top*z, Width*z, Height*z);
 end;
 
 procedure TMainForm.actDrawBlock2Execute(Sender: TObject);
 begin
-  with CBlock2 do
+  with Block2 do
     shpBlock2.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
 procedure TMainForm.actDrawBlock3Execute(Sender: TObject);
 begin
-  with CBlock3 do
+  with Block3 do
     shpBlock3.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
@@ -160,19 +160,19 @@ end;
 
 procedure TMainForm.actDrawExitBlockExecute(Sender: TObject);
 begin
-  with CExitBlock do
+  with ExitBlock do
     shpExitBlock.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
 procedure TMainForm.actDrawExitSegmentExecute(Sender: TObject);
 begin
-  with CExitSegment do
+  with ExitSegment do
     shpExitSegment.SetBounds(Left*z-e, Top*z, e, z)
 end;
 
 procedure TMainForm.actDrawTableExecute(Sender: TObject);
 begin
-  with CTable do
+  with Table do
     pnlTable.SetBounds(Left*z + 10, Top*z + 30, Width*z, Height*z)
 end;
 

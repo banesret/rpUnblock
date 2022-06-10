@@ -13,12 +13,12 @@ object MainForm: TMainForm
   HelpFile = 
     'E:\Users\banes\Documents\Embarcadero\Studio\projects\grUnblock\p' +
     'rUnblock\Help\Unblock.chm'
-  Menu = MainMenu1
+  Menu = mmnMenu
   OldCreateOrder = False
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object lblDirections: TLabel
     Left = 594
     Top = 194
     Width = 47
@@ -93,7 +93,7 @@ object MainForm: TMainForm
       Brush.Color = clPurple
     end
   end
-  object pnlNavigator: TPanel
+  object pnlDirections: TPanel
     Left = 569
     Top = 221
     Width = 120
@@ -167,7 +167,7 @@ object MainForm: TMainForm
       TabOrder = 3
     end
   end
-  object ActionList1: TActionList
+  object actList: TActionList
     Left = 768
     Top = 88
     object actHelpContents: THelpContents
@@ -217,19 +217,19 @@ object MainForm: TMainForm
       OnExecute = actDrawExecute
     end
   end
-  object MainMenu1: TMainMenu
+  object mmnMenu: TMainMenu
     Left = 768
     Top = 24
     object mniGame: TMenuItem
       Caption = 'Game'
-      object StartGame1: TMenuItem
+      object mniStartGame: TMenuItem
         Action = actStartGame
         Caption = 'Start'
       end
     end
-    object Help1: TMenuItem
+    object mniHelp: TMenuItem
       Caption = 'Help'
-      object HelpContent1: TMenuItem
+      object mniHelpContent: TMenuItem
         Action = actHelpContents
       end
     end
