@@ -69,7 +69,7 @@ var
 implementation
 
 uses
-  unCMain;
+  unMain.C;
 
   {$R *.dfm}
 
@@ -87,40 +87,46 @@ end;
 
 procedure TMainForm.sbLeftClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@ExitBlock, Lefty)
-  else if rbtBlock1.Checked then CApplication.Run(@Block1, Lefty)
-       else if rbtBlock2.Checked then CApplication.Run(@Block2, Lefty)
-            else if rbtBlock3.Checked then CApplication.Run(@Block3, Lefty);
+  with Application do
+  if rbtExitBlock.Checked then Run(@ExitBlock, Lefty)
+  else if rbtBlock1.Checked then Run(@Block1, Lefty)
+       else if rbtBlock2.Checked then Run(@Block2, Lefty)
+            else if rbtBlock3.Checked then Run(@Block3, Lefty);
   // no idea why can't work just Left
   actDrawExecute(nil)
 end;
 
 procedure TMainForm.sbRightClick(Sender: TObject);
 begin
-  CApplication.FResult := False;
-  if rbtExitBlock.Checked then CApplication.Run(@ExitBlock, Right)
-  else if rbtBlock1.Checked then CApplication.Run(@Block1, Right)
-       else if rbtBlock2.Checked then CApplication.Run(@Block2, Right)
-            else if rbtBlock3.Checked then CApplication.Run(@Block3, Right);
-  actDrawExecute(nil);
-  if CApplication.FResult then ShowMessage('Win!')
+  with Application do
+  begin
+    FResult := False;
+    if rbtExitBlock.Checked then Run(@ExitBlock, Right)
+    else if rbtBlock1.Checked then Run(@Block1, Right)
+         else if rbtBlock2.Checked then Run(@Block2, Right)
+              else if rbtBlock3.Checked then Run(@Block3, Right);
+    actDrawExecute(nil);
+    if FResult then ShowMessage('Win!')
+  end;
 end;
 
 procedure TMainForm.sbUpClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@ExitBlock, Up)
-  else if rbtBlock1.Checked then CApplication.Run(@Block1, Up)
-       else if rbtBlock2.Checked then CApplication.Run(@Block2, Up)
-            else if rbtBlock3.Checked then CApplication.Run(@Block3, Up);
+  with Application do
+  if rbtExitBlock.Checked then Run(@ExitBlock, Up)
+  else if rbtBlock1.Checked then Run(@Block1, Up)
+       else if rbtBlock2.Checked then Run(@Block2, Up)
+            else if rbtBlock3.Checked then Run(@Block3, Up);
   actDrawExecute(nil)
 end;
 
 procedure TMainForm.spDownClick(Sender: TObject);
 begin
-  if rbtExitBlock.Checked then CApplication.Run(@ExitBlock, Down)
-  else if rbtBlock1.Checked then CApplication.Run(@Block1, Down)
-       else if rbtBlock2.Checked then CApplication.Run(@Block2, Down)
-            else if rbtBlock3.Checked then CApplication.Run(@Block3, Down);
+  with Application do
+  if rbtExitBlock.Checked then Run(@ExitBlock, Down)
+  else if rbtBlock1.Checked then Run(@Block1, Down)
+       else if rbtBlock2.Checked then Run(@Block2, Down)
+            else if rbtBlock3.Checked then Run(@Block3, Down);
   actDrawExecute(nil)
 end;
 
@@ -178,12 +184,12 @@ end;
 
 procedure TMainForm.actHelpContentsExecute(Sender: TObject);
 begin
-  Application.HelpContext(0)
+  Vcl.Forms.Application.HelpContext(0)
 end;
 
 procedure TMainForm.actStartGameExecute(Sender: TObject);
 begin
-  CApplication.Initialize;
+  Application.Initialize;
   actDrawExecute(nil)
 end;
 

@@ -1,9 +1,9 @@
 ﻿program Unblock;
 
 uses
+  unMain.C in 'unMain.C.pas', {must be above Forms because of Application}
   Vcl.Forms,
-  unMain in 'unMain.pas',
-  unCMain in 'unCMain.pas';
+  unMain in 'unMain.pas';
 
 {$R *.res}
 

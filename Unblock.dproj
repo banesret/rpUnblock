@@ -98,10 +98,8 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="unMain.pas">
-            <Form>/  unCMain in &apos;unCMain.pas&apos;</Form>
-        </DCCReference>
-        <DCCReference Include="unCMain.pas"/>
+        <DCCReference Include="unMain.C.pas"/>
+        <DCCReference Include="unMain.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -5,7 +5,7 @@ object MainForm: TMainForm
   BorderStyle = bsSingle
   Caption = 'MainForm'
   ClientHeight = 432
-  ClientWidth = 843
+  ClientWidth = 628
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,15 +21,15 @@ object MainForm: TMainForm
   PixelsPerInch = 96
   TextHeight = 13
   object lblDirections: TLabel
-    Left = 594
-    Top = 194
+    Left = 454
+    Top = 218
     Width = 47
     Height = 13
     Caption = 'Directions'
   end
   object lblBlocks: TLabel
-    Left = 472
-    Top = 194
+    Left = 468
+    Top = 37
     Width = 29
     Height = 13
     Caption = 'Blocks'
@@ -96,8 +96,8 @@ object MainForm: TMainForm
     end
   end
   object pnlDirections: TPanel
-    Left = 569
-    Top = 221
+    Left = 429
+    Top = 245
     Width = 120
     Height = 120
     TabOrder = 0
@@ -131,10 +131,10 @@ object MainForm: TMainForm
     end
   end
   object Panel1: TPanel
-    Left = 448
-    Top = 221
+    Left = 444
+    Top = 64
     Width = 97
-    Height = 141
+    Height = 137
     TabOrder = 2
     object rbtExitBlock: TRadioButton
       Left = 6
@@ -170,8 +170,8 @@ object MainForm: TMainForm
     end
   end
   object actList: TActionList
-    Left = 768
-    Top = 88
+    Left = 568
+    Top = 104
     object actHelpContents: THelpContents
       Category = 'Help'
       Caption = '&Contents'
@@ -220,8 +220,8 @@ object MainForm: TMainForm
     end
   end
   object mmnMenu: TMainMenu
-    Left = 768
-    Top = 24
+    Left = 568
+    Top = 40
     object mniGame: TMenuItem
       Caption = 'Game'
       object mniStartGame: TMenuItem

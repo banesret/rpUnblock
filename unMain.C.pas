@@ -1,4 +1,4 @@
-﻿unit unCMain;
+﻿unit unMain.C;
 
 interface
 
@@ -6,7 +6,7 @@ uses
   System.Classes, System.Types;
 
 type
-  TCApplication = record
+  TApplication = record
     type
       TDirections = (Lefty, Right, Up, Down);
       PTRect = ^TRect;
@@ -18,12 +18,12 @@ type
   end;
 
 var
-  CApplication: TCApplication;
+  Application: TApplication;
   Table, ExitBlock, Block1, Block2, Block3, ExitSegment: TRect;
 
 implementation
 
-procedure TCApplication.Initialize;
+procedure TApplication.Initialize;
 begin
   {Table definition}
   Table.SetLocation(0, 0);
@@ -56,11 +56,11 @@ begin
   ExitSegment.Height := 1;
 end;
 
-procedure TCApplication.CreateForm;
+procedure TApplication.CreateForm;
 begin
 end;
 
-procedure TCApplication.Run;
+procedure TApplication.Run;
 var
   P: TPoint;
   Blocked: Boolean;
