@@ -4,8 +4,8 @@ object MainForm: TMainForm
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'MainForm'
-  ClientHeight = 432
-  ClientWidth = 628
+  ClientHeight = 646
+  ClientWidth = 677
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,13 +26,6 @@ object MainForm: TMainForm
     Width = 47
     Height = 13
     Caption = 'Directions'
-  end
-  object lblBlocks: TLabel
-    Left = 468
-    Top = 37
-    Width = 29
-    Height = 13
-    Caption = 'Blocks'
   end
   object pnlTable: TPanel
     Left = 32
@@ -131,8 +124,8 @@ object MainForm: TMainForm
     end
   end
   object Panel1: TPanel
-    Left = 444
-    Top = 64
+    Left = 556
+    Top = 472
     Width = 97
     Height = 137
     TabOrder = 2
@@ -168,6 +161,20 @@ object MainForm: TMainForm
       Caption = 'Block 3'
       TabOrder = 3
     end
+  end
+  object rgrBlocks: TRadioGroup
+    Left = 429
+    Top = 36
+    Width = 120
+    Height = 176
+    Caption = 'Blocks'
+    ItemIndex = 0
+    Items.Strings = (
+      'Exit Block'
+      'Block 1'
+      'Block 2'
+      'Block 3')
+    TabOrder = 3
   end
   object actList: TActionList
     Left = 568

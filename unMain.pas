@@ -42,7 +42,7 @@ type
     rbtBlock2: TRadioButton;
     rbtBlock3: TRadioButton;
     lblDirections: TLabel;
-    lblBlocks: TLabel;
+    rgrBlocks: TRadioGroup;
     procedure FormCreate(Sender: TObject);
     procedure actHelpContentsExecute(Sender: TObject);
     procedure actDrawTableExecute(Sender: TObject);
@@ -59,6 +59,7 @@ type
     procedure sbLeftClick(Sender: TObject);
   private
     { Private declarations }
+    function Index_: Byte; {returns Block index based upon radio button}
   public
     { Public declarations }
   end;
@@ -77,6 +78,11 @@ const
   z = 100; {zoom}
   e = 15; {edge}
 
+function TMainForm.Index_;
+begin
+
+end;
+
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
 //  Application.HelpFile := ExtractFilePath(Application.ExeName) +
@@ -87,11 +93,7 @@ end;
 
 procedure TMainForm.sbLeftClick(Sender: TObject);
 begin
-  with Application do
-  if rbtExitBlock.Checked then Run(@ExitBlock, Lefty)
-  else if rbtBlock1.Checked then Run(@Block1, Lefty)
-       else if rbtBlock2.Checked then Run(@Block2, Lefty)
-            else if rbtBlock3.Checked then Run(@Block3, Lefty);
+  Application.Run(Blocks.Items[rgrBlocks.ItemIndex], Lefty);
   // no idea why can't work just Left
   actDrawExecute(nil)
 end;
@@ -101,10 +103,7 @@ begin
   with Application do
   begin
     FResult := False;
-    if rbtExitBlock.Checked then Run(@ExitBlock, Right)
-    else if rbtBlock1.Checked then Run(@Block1, Right)
-         else if rbtBlock2.Checked then Run(@Block2, Right)
-              else if rbtBlock3.Checked then Run(@Block3, Right);
+    Run(Blocks.Items[rgrBlocks.ItemIndex], Right);
     actDrawExecute(nil);
     if FResult then ShowMessage('Win!')
   end;
@@ -112,21 +111,13 @@ end;
 
 procedure TMainForm.sbUpClick(Sender: TObject);
 begin
-  with Application do
-  if rbtExitBlock.Checked then Run(@ExitBlock, Up)
-  else if rbtBlock1.Checked then Run(@Block1, Up)
-       else if rbtBlock2.Checked then Run(@Block2, Up)
-            else if rbtBlock3.Checked then Run(@Block3, Up);
+  Application.Run(Blocks.Items[rgrBlocks.ItemIndex], Up);
   actDrawExecute(nil)
 end;
 
 procedure TMainForm.spDownClick(Sender: TObject);
 begin
-  with Application do
-  if rbtExitBlock.Checked then Run(@ExitBlock, Down)
-  else if rbtBlock1.Checked then Run(@Block1, Down)
-       else if rbtBlock2.Checked then Run(@Block2, Down)
-            else if rbtBlock3.Checked then Run(@Block3, Down);
+  Application.Run(Blocks.Items[rgrBlocks.ItemIndex], Down);
   actDrawExecute(nil)
 end;
 

@@ -3,7 +3,8 @@
 interface
 
 uses
-  System.Classes, System.Types;
+  System.Classes, System.Types,
+  System.Contnrs;
 
 type
   TApplication = record
@@ -19,41 +20,53 @@ type
 
 var
   Application: TApplication;
+  {TODO -oOwner -cGeneral : this should be replaced with TList}
   Table, ExitBlock, Block1, Block2, Block3, ExitSegment: TRect;
+  {no TComponents nor TObjectList because TRect is not an object}
+  Blocks: TList;
 
 implementation
 
 procedure TApplication.Initialize;
 begin
-  {Table definition}
-  Table.SetLocation(0, 0);
-  Table.Width := 4;
-  Table.Height := 4;
+{TODO -oOwner -cGeneral : Introduced Map1.inc.}
+//{$INCLUDE 'Map1.inc'}
+
+ {ExitBlock definition}
+  ExitBlock.SetLocation(0, 1);
+  ExitBlock.Width := 2;
+  ExitBlock.Height := 1;
+  Blocks.Add(@ExitBlock);
 
   {Block1 definition}
   Block1.SetLocation(2, 0);
   Block1.Width := 1;
   Block1.Height := 2;
+  Blocks.Add(@Block1);
 
   {Block2 definition}
   Block2.SetLocation(1, 2);
   Block2.Width := 2;
   Block2.Height := 1;
+  Blocks.Add(@Block2);
 
   {Block3 definition}
   Block3.SetLocation(2, 3);
   Block3.Width := 2;
   Block3.Height := 1;
+  Blocks.Add(@Block3);
 
-  {ExitBlock definition}
-  ExitBlock.SetLocation(0, 1);
-  ExitBlock.Width := 2;
-  ExitBlock.Height := 1;
+  {Table definition}
+  Table.SetLocation(0, 0);
+  Table.Width := 4;
+  Table.Height := 4;
+  Blocks.Add(@Table);
 
   {ExitSegment definition}
   ExitSegment.SetLocation(4, 1);
   ExitSegment.Width := 1;
   ExitSegment.Height := 1;
+  Blocks.Add(@ExitSegment);
 end;
 
 procedure TApplication.CreateForm;
@@ -136,5 +149,11 @@ begin
         if not Blocked then Block.Offset(0, -1)
       end;
 end;
+
+initialization
+Blocks := TObjectList.Create;
+
+finalization
+Blocks.Free
 
 end.
