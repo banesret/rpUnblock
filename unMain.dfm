@@ -21,8 +21,8 @@ object MainForm: TMainForm
   PixelsPerInch = 96
   TextHeight = 13
   object lblDirections: TLabel
-    Left = 454
-    Top = 218
+    Left = 465
+    Top = 338
     Width = 47
     Height = 13
     Caption = 'Directions'
@@ -87,10 +87,22 @@ object MainForm: TMainForm
       Height = 65
       Brush.Color = clPurple
     end
+    object shpBlock4: TShape
+      Left = 64
+      Top = 260
+      Width = 65
+      Height = 65
+      Hint = 'Block3'
+      Brush.Color = clGreen
+      ParentShowHint = False
+      Pen.Width = 3
+      ShowHint = True
+      Visible = False
+    end
   end
   object pnlDirections: TPanel
     Left = 429
-    Top = 245
+    Top = 373
     Width = 120
     Height = 120
     TabOrder = 0
@@ -124,18 +136,37 @@ object MainForm: TMainForm
     end
   end
   object rgrBlocks: TRadioGroup
-    Left = 429
+    Left = 425
     Top = 36
     Width = 120
-    Height = 176
+    Height = 221
     Caption = 'Blocks'
     ItemIndex = 0
     Items.Strings = (
       'Exit Block'
       'Block 1'
       'Block 2'
-      'Block 3')
+      'Block 3'
+      'Block 4'
+      'Block 5')
     TabOrder = 2
+  end
+  object lbxLevel: TListBox
+    Left = 176
+    Top = 488
+    Width = 65
+    Height = 89
+    ExtendedSelect = False
+    ItemHeight = 13
+    Items.Strings = (
+      'Level 1'
+      'Level 2'
+      'Level 3'
+      'Level 4'
+      'Level 5'
+      'Level 6')
+    TabOrder = 3
+    OnClick = lbxLevelClick
   end
   object actList: TActionList
     Left = 568
@@ -175,6 +206,11 @@ object MainForm: TMainForm
       Category = 'Draw'
       Caption = 'actDrawBlock3'
       OnExecute = actDrawBlock3Execute
+    end
+    object actDrawBlock4: TAction
+      Category = 'Draw'
+      Caption = 'actDrawBlock4'
+      OnExecute = actDrawBlock4Execute
     end
     object actDrawExitSegment: TAction
       Category = 'Draw'

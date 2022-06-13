@@ -38,6 +38,9 @@ type
     shpExitBlock: TShape;
     lblDirections: TLabel;
     rgrBlocks: TRadioGroup;
+    lbxLevel: TListBox;
+    actDrawBlock4: TAction;
+    shpBlock4: TShape;
     procedure FormCreate(Sender: TObject);
     procedure actHelpContentsExecute(Sender: TObject);
     procedure actDrawTableExecute(Sender: TObject);
@@ -52,6 +55,8 @@ type
     procedure spDownClick(Sender: TObject);
     procedure sbUpClick(Sender: TObject);
     procedure sbLeftClick(Sender: TObject);
+    procedure lbxLevelClick(Sender: TObject);
+    procedure actDrawBlock4Execute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,6 +82,45 @@ begin
 //  Application.HelpFile := ExtractFilePath(Application.ExeName) +
 //    'Help\Unblock.chm';
   actStartGameExecute(nil)
+end;
+
+procedure TMainForm.actStartGameExecute(Sender: TObject);
+begin
+  lbxLevel.ItemIndex := 0;
+  Application.Level := 1;
+  Application.Initialize1;
+  actDrawExecute(nil)
+end;
+
+procedure TMainForm.actDrawExecute(Sender: TObject);
+begin
+  {draw table}
+  actDrawTableExecute(nil);
+  pnlTable.SendToBack;
+
+  {draw blocks}
+  actDrawExitBlockExecute(nil);
+  actDrawBlock1Execute(nil);
+  actDrawBlock2Execute(nil);
+  actDrawBlock3Execute(nil);
+  if Application.Level = 2 then
+    begin
+      shpBlock4.Visible := true;
+      actDrawBlock4Execute(nil);
+    end
+  else shpBlock4.Visible := false;
+
+  {draw exit segment}
+  actDrawExitSegmentExecute(nil);
+end;
+
+procedure TMainForm.lbxLevelClick(Sender: TObject);
+begin
+  case lbxLevel.ItemIndex of
+    0: unMain.C.Application.Initialize1;
+    1: unMain.C.Application.Initialize2
+  end;
+  actDrawExecute(nil)
 end;
 
 procedure TMainForm.sbLeftClick(Sender: TObject);
@@ -133,22 +177,18 @@ begin
     shpBlock3.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
-procedure TMainForm.actDrawExecute(Sender: TObject);
+procedure TMainForm.actDrawBlock4Execute(Sender: TObject);
 begin
-  {draw table}
-  actDrawTableExecute(nil);
-  pnlTable.SendToBack;
-
-  {draw blocks}
-  actDrawExitBlockExecute(nil);
-  actDrawBlock1Execute(nil);
-  actDrawBlock2Execute(nil);
-  actDrawBlock3Execute(nil);
-
-  {draw exit segment}
-  actDrawExitSegmentExecute(nil);
+  with Blocks[4] do
+    shpBlock4.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
+//procedure TMainForm.actDrawBlock3Execute(Sender: TObject);
+//begin
+//  with Blocks[5] do
+//    shpBlock5.SetBounds(Left*z, Top*z, Width*z, Height*z)
+//end;
+//
 procedure TMainForm.actDrawExitSegmentExecute(Sender: TObject);
 begin
   with ExitSegment do
@@ -164,12 +204,6 @@ end;
 procedure TMainForm.actHelpContentsExecute(Sender: TObject);
 begin
   Vcl.Forms.Application.HelpContext(0)
-end;
-
-procedure TMainForm.actStartGameExecute(Sender: TObject);
-begin
-  Application.Initialize;
-  actDrawExecute(nil)
 end;
 
 end.
