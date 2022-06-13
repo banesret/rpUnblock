@@ -20,9 +20,7 @@ type
 
 var
   Application: TApplication;
-  {TODO -oOwner -cGeneral : this should be replaced with TList}
-  Table, ExitBlock, Block1, Block2, Block3, ExitSegment: TRect;
-  {no TComponents nor TObjectList because TRect is not an object}
+  Table, ExitSegment: TRect;
   Blocks: array of TRect;
 
 implementation
@@ -69,9 +67,16 @@ begin
 end;
 
 procedure TApplication.Run;
-var
-  P: TPoint;
-  Blocked: Boolean;
+  var
+    P: TPoint;
+  function Blocked: Boolean;
+    var
+      i: Byte;
+  begin
+    Result := false;
+    for i := 0 to Length(Blocks)-1
+      do Result := Result or Blocks[i].Contains(P)
+  end;
 begin
   P := Blocks[i].Location;
   {horizontal movement left}
@@ -80,11 +85,6 @@ begin
     if Blocks[i].Left > 0 then
       begin
         P.Offset(-1, 0);
-        Blocked :=
-          Block1.Contains(P) or
-          Block2.Contains(P) or
-          Block3.Contains(P) or
-          ExitBlock.Contains(P);
         if not Blocked then Blocks[i].Offset(-1, 0)
       end;
 
@@ -94,11 +94,6 @@ begin
     if Blocks[i].Right <= 3 then
       begin
         P.Offset(Blocks[i].Width, 0);
-        Blocked :=
-          Block1.Contains(P) or
-          Block2.Contains(P) or
-          Block3.Contains(P) or
-          ExitBlock.Contains(P);
         if not Blocked then Blocks[i].Offset(1, 0)
       end
     {block on right edge}
@@ -120,12 +115,7 @@ begin
     {block not on down edge}
     if Blocks[i].Bottom <= 3 then
       begin
-        P.Offset(0, Block1.Height);
-         Blocked :=
-          Block1.Contains(P) or
-          Block2.Contains(P) or
-          Block3.Contains(P) or
-          ExitBlock.Contains(P);
+        P.Offset(0, Blocks[i].Height);
         if not Blocked then Blocks[i].Offset(0, 1)
       end;
 
@@ -135,11 +125,6 @@ begin
     if Blocks[i].Top > 0 then
       begin
         P.Offset(0, -1);
-        Blocked :=
-          Block1.Contains(P) or
-          Block2.Contains(P) or
-          Block3.Contains(P) or
-          ExitBlock.Contains(P);
         if not Blocked then Blocks[i].Offset(0, -1)
       end;
 end;
