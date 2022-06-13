@@ -36,11 +36,6 @@ type
     shpBlock3: TShape;
     shpExitSegment: TShape;
     shpExitBlock: TShape;
-    Panel1: TPanel;
-    rbtExitBlock: TRadioButton;
-    rbtBlock1: TRadioButton;
-    rbtBlock2: TRadioButton;
-    rbtBlock3: TRadioButton;
     lblDirections: TLabel;
     rgrBlocks: TRadioGroup;
     procedure FormCreate(Sender: TObject);
@@ -87,7 +82,6 @@ procedure TMainForm.FormCreate(Sender: TObject);
 begin
 //  Application.HelpFile := ExtractFilePath(Application.ExeName) +
 //    'Help\Unblock.chm';
-  rbtBlock1.Checked := True;
   actStartGameExecute(nil)
 end;
 

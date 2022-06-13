@@ -123,45 +123,6 @@ object MainForm: TMainForm
       OnClick = sbUpClick
     end
   end
-  object Panel1: TPanel
-    Left = 556
-    Top = 472
-    Width = 97
-    Height = 137
-    TabOrder = 2
-    object rbtExitBlock: TRadioButton
-      Left = 6
-      Top = 8
-      Width = 113
-      Height = 17
-      Caption = 'Exit Block'
-      TabOrder = 0
-    end
-    object rbtBlock1: TRadioButton
-      Left = 6
-      Top = 39
-      Width = 113
-      Height = 17
-      Caption = 'Block 1'
-      TabOrder = 1
-    end
-    object rbtBlock2: TRadioButton
-      Left = 6
-      Top = 70
-      Width = 113
-      Height = 17
-      Caption = 'Block 2'
-      TabOrder = 2
-    end
-    object rbtBlock3: TRadioButton
-      Left = 8
-      Top = 104
-      Width = 113
-      Height = 17
-      Caption = 'Block 3'
-      TabOrder = 3
-    end
-  end
   object rgrBlocks: TRadioGroup
     Left = 429
     Top = 36
@@ -174,7 +135,7 @@ object MainForm: TMainForm
       'Block 1'
       'Block 2'
       'Block 3')
-    TabOrder = 3
+    TabOrder = 2
   end
   object actList: TActionList
     Left = 568
