@@ -54,7 +54,6 @@ type
     procedure sbLeftClick(Sender: TObject);
   private
     { Private declarations }
-    function Index_: Byte; {returns Block index based upon radio button}
   public
     { Public declarations }
   end;
@@ -73,11 +72,6 @@ const
   z = 100; {zoom}
   e = 15; {edge}
 
-function TMainForm.Index_;
-begin
-
-end;
-
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
 //  Application.HelpFile := ExtractFilePath(Application.ExeName) +
@@ -87,7 +81,7 @@ end;
 
 procedure TMainForm.sbLeftClick(Sender: TObject);
 begin
-  Application.Run(Blocks.Items[rgrBlocks.ItemIndex], Lefty);
+  Application.Run(rgrBlocks.ItemIndex, Lefty);
   // no idea why can't work just Left
   actDrawExecute(nil)
 end;
@@ -97,7 +91,7 @@ begin
   with Application do
   begin
     FResult := False;
-    Run(Blocks.Items[rgrBlocks.ItemIndex], Right);
+    Run(rgrBlocks.ItemIndex, Right);
     actDrawExecute(nil);
     if FResult then ShowMessage('Win!')
   end;
@@ -105,31 +99,37 @@ end;
 
 procedure TMainForm.sbUpClick(Sender: TObject);
 begin
-  Application.Run(Blocks.Items[rgrBlocks.ItemIndex], Up);
+  Application.Run(rgrBlocks.ItemIndex, Up);
   actDrawExecute(nil)
 end;
 
 procedure TMainForm.spDownClick(Sender: TObject);
 begin
-  Application.Run(Blocks.Items[rgrBlocks.ItemIndex], Down);
+  Application.Run(rgrBlocks.ItemIndex, Down);
   actDrawExecute(nil)
+end;
+
+procedure TMainForm.actDrawExitBlockExecute(Sender: TObject);
+begin
+  with Blocks[0] do
+    shpExitBlock.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
 procedure TMainForm.actDrawBlock1Execute(Sender: TObject);
 begin
-  with Block1 do
+  with Blocks[1] do
     shpBlock1.SetBounds(Left*z, Top*z, Width*z, Height*z);
 end;
 
 procedure TMainForm.actDrawBlock2Execute(Sender: TObject);
 begin
-  with Block2 do
+  with Blocks[2] do
     shpBlock2.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
 procedure TMainForm.actDrawBlock3Execute(Sender: TObject);
 begin
-  with Block3 do
+  with Blocks[3] do
     shpBlock3.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
@@ -147,12 +147,6 @@ begin
 
   {draw exit segment}
   actDrawExitSegmentExecute(nil);
-end;
-
-procedure TMainForm.actDrawExitBlockExecute(Sender: TObject);
-begin
-  with ExitBlock do
-    shpExitBlock.SetBounds(Left*z, Top*z, Width*z, Height*z)
 end;
 
 procedure TMainForm.actDrawExitSegmentExecute(Sender: TObject);
